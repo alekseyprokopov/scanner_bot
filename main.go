@@ -12,7 +12,7 @@ const (
 )
 
 func main() {
-
+	//5935039498:AAEUGQHXnEVGVm3AQdmJAlmSYGqfnMgJWFk
 	tgClient := telegram.NewClient(tgBotHost, token())
 
 	fmt.Println(tgClient.Updates(10, 10))
