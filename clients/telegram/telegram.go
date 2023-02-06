@@ -89,7 +89,7 @@ func (c *Client) doRequest(method string, query url.Values) ([]byte, error) {
 
 }
 
-func (c *Client) SendMessage(chatId int, text string) {
+func (c *Client) SendMessage(chatId int, text string) error {
 	q := url.Values{}
 	q.Add("chat_id", strconv.Itoa(chatId))
 	q.Add("text", text)
@@ -98,4 +98,5 @@ func (c *Client) SendMessage(chatId int, text string) {
 	if err != nil {
 		fmt.Errorf("can't send message: %w", err)
 	}
+	return nil
 }
