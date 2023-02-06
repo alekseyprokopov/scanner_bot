@@ -2,26 +2,33 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
-	"scanner_bot/clients/telegram"
+	tgClient "scanner_bot/clients/telegram"
+	event_consumer "scanner_bot/consumer/event-consumer"
+	"scanner_bot/events/telegram"
+	"scanner_bot/storage/files"
 )
 
 const (
-	tgBotHost = "api.telegram.org"
+	tgBotHost   = "api.telegram.org"
+	storagePath = "storage"
+	batchSize   = 100
 )
 
 func main() {
-	//5935039498:AAEUGQHXnEVGVm3AQdmJAlmSYGqfnMgJWFk
-	tgClient := telegram.NewClient(tgBotHost, token())
 
-	fmt.Println(tgClient.Updates(10, 10))
+	eventsProcessor := telegram.New(
+		tgClient.New(tgBotHost, token()),
+		files.New(storagePath),
+	)
 
-	//fetcher = fetcher.New()
+	log.Print("service started...")
 
-	//processor = processor.New()
+	consumer := event_consumer.New(eventsProcessor, eventsProcessor, batchSize)
 
-	//consumer.Start(fetcher, processor)
+	if err := consumer.Start(); err != nil {
+		log.Fatal()
+	}
 
 }
 
