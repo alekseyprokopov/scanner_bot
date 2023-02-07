@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 	tgClient "scanner_bot/clients/telegram"
-	event_consumer "scanner_bot/consumer/event-consumer"
+	eventConsumer "scanner_bot/consumer/event-consumer"
 	"scanner_bot/events/telegram"
 	"scanner_bot/storage/files"
 )
@@ -24,7 +24,7 @@ func main() {
 
 	log.Print("service started...")
 
-	consumer := event_consumer.New(eventsProcessor, eventsProcessor, batchSize)
+	consumer := eventConsumer.New(eventsProcessor, eventsProcessor, batchSize)
 
 	if err := consumer.Start(); err != nil {
 		log.Fatal()
