@@ -19,7 +19,7 @@ const (
 func (p *EventProcessor) doCmd(text string, chatID int, username string) error {
 	text = strings.TrimSpace(text)
 
-	log.Printf("got new command: %s \n from user: %s", text, username)
+	log.Printf("got new command: %s, from user: %s", text, username)
 
 	if isAddCmd(text) {
 		return p.SavePage(chatID, text, username)

@@ -12,11 +12,11 @@ type Update struct {
 
 type IncomingMessage struct {
 	Text string `json:"text"`
-	From From   `json:"from"`
+	From User   `json:"from"`
 	Chat Chat   `json:"chat"`
 }
 
-type From struct {
+type User struct {
 	Username string `json:"username"`
 }
 
