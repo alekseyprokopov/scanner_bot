@@ -40,7 +40,11 @@ func (p *EventProcessor) doCmd(text string, chatID int, username string) error {
 }
 
 func (p *EventProcessor) SavePage(chatID int, pageURL string, username string) (err error) {
-	defer func() { err = fmt.Errorf("can't save page (cmd): %w", err) }()
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("can't save page (cmd): %w", err)
+		}
+	}()
 
 	page := &storage.Page{
 		URL:      pageURL,
@@ -67,7 +71,11 @@ func (p *EventProcessor) SavePage(chatID int, pageURL string, username string) (
 }
 
 func (p *EventProcessor) sendRandom(chatId int, username string) (err error) {
-	defer func() { err = fmt.Errorf("can't send random page (cmd): %w", err) }()
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("can't send random page (cmd): %w", err)
+		}
+	}()
 
 	page, err := p.storage.Pick(username)
 

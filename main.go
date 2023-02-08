@@ -5,7 +5,7 @@ import (
 	"log"
 	tgClient "scanner_bot/clients/telegram"
 	eventConsumer "scanner_bot/consumer/event-consumer"
-	"scanner_bot/events/telegram"
+	eventProcessor "scanner_bot/events/telegram"
 	"scanner_bot/storage/files"
 )
 
@@ -17,7 +17,7 @@ const (
 
 func main() {
 
-	eventsProcessor := telegram.New(
+	eventsProcessor := eventProcessor.New(
 		tgClient.New(tgBotHost, token()),
 		files.New(storagePath),
 	)
